@@ -1,0 +1,333 @@
+﻿<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <title>Rabia, Benimle Çıkar mısın? ❤️</title>
+    <meta name="theme-color" content="#ff5aa5" />
+    <style>
+        :root {
+            --ink: #0f172a;
+            --paper: #ffffff;
+            --p1: #ff5aa5;
+            --p2: #ff8ac2;
+            --p3: #ffd1e7;
+            --glass: rgba(255,255,255,.18);
+            --glass-b: rgba(255,255,255,.4);
+        }
+
+        * {
+            box-sizing: border-box
+        }
+
+        html, body {
+            height: 100%
+        }
+
+        body {
+            margin: 0;
+            overflow: hidden;
+            font-family: system-ui,-apple-system,"Segoe UI",Roboto,Arial;
+            color: var(--ink);
+            background: radial-gradient(1000px 800px at 15% 10%, #ffe4f2 30%, transparent 70%), radial-gradient(900px 700px at 85% 90%, #ffd6ec 30%, transparent 70%), linear-gradient(135deg, #ffe9f4, #ffd8ee 40%, #ffc6e8);
+            display: grid;
+            place-items: center;
+            user-select: none;
+            -webkit-user-select: none;
+        }
+
+        /* büyük arka plan kalbi (nabız) */
+        .big-heart {
+            position: fixed;
+            inset: auto;
+            width: 200px;
+            height: 180px;
+            z-index: 0;
+            opacity: .18;
+            filter: blur(1px);
+            transform: translateY(-6px);
+            animation: beat 1.2s ease-in-out infinite;
+        }
+
+            .big-heart, .big-heart::before, .big-heart::after {
+                background: linear-gradient(135deg,var(--p1),var(--p2));
+                position: absolute;
+                content: "";
+                border-radius: 20px;
+            }
+
+        .big-heart {
+            transform: rotate(45deg);
+        }
+
+            .big-heart::before {
+                width: 200px;
+                height: 200px;
+                left: -100px;
+                top: -20px;
+                border-radius: 50%
+            }
+
+            .big-heart::after {
+                width: 200px;
+                height: 200px;
+                left: 20px;
+                top: -100px;
+                border-radius: 50%
+            }
+
+        @keyframes beat {
+            0%,100% {
+                transform: translateY(-6px) rotate(45deg) scale(1)
+            }
+
+            25% {
+                transform: translateY(-6px) rotate(45deg) scale(1.06)
+            }
+
+            50% {
+                transform: translateY(-6px) rotate(45deg) scale(.98)
+            }
+
+            75% {
+                transform: translateY(-6px) rotate(45deg) scale(1.04)
+            }
+        }
+
+        .wrap {
+            position: relative;
+            z-index: 2;
+            width: min(720px,94vw);
+            padding: 18px;
+            display: grid;
+            place-items: center;
+        }
+
+        .card {
+            width: 100%;
+            border-radius: 22px;
+            padding: clamp(22px,5vw,34px);
+            background: var(--glass);
+            border: 1px solid var(--glass-b);
+            backdrop-filter: blur(16px) saturate(120%);
+            -webkit-backdrop-filter: blur(16px) saturate(120%);
+            box-shadow: 0 16px 38px rgba(0,0,0,.18);
+            text-align: center;
+            animation: fade .6s ease both;
+        }
+
+        @keyframes fade {
+            from {
+                opacity: 0;
+                transform: translateY(8px)
+            }
+
+            to {
+                opacity: 1;
+                transform: none
+            }
+        }
+
+        h1 {
+            margin: 4px 0 10px;
+            line-height: 1.1;
+            font-size: clamp(26px,7vw,44px);
+            background: linear-gradient(90deg,var(--p1),var(--p2));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            text-shadow: 0 2px 12px rgba(255,90,165,.35);
+        }
+
+        .lead {
+            margin: 0 0 14px;
+            font-size: clamp(14px,4.6vw,18px);
+            opacity: .9
+        }
+
+        .btns {
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-top: 8px
+        }
+
+        .btn {
+            border: 0;
+            border-radius: 16px;
+            cursor: pointer;
+            padding: 14px 22px;
+            font-size: clamp(15px,4.8vw,18px);
+            transition: transform .08s ease, filter .15s ease;
+            box-shadow: 0 10px 22px rgba(0,0,0,.15);
+        }
+
+            .btn:active {
+                transform: scale(.98)
+            }
+
+        .yes {
+            color: #0b1626;
+            background: linear-gradient(135deg,var(--p1),var(--p2));
+        }
+
+        .no {
+            color: #7a0f3c;
+            background: #fff;
+            border: 1px solid rgba(255,255,255,.6);
+        }
+
+        .note {
+            min-height: 22px;
+            margin-top: 10px;
+            font-weight: 600;
+            color: #7a0f3c;
+        }
+
+        /* evet sonrası final mesajı */
+        .final {
+            display: none;
+            text-align: center;
+            padding: 20px 10px;
+        }
+
+            .final h2 {
+                font-size: clamp(26px,7vw,42px);
+                margin: 8px 0 6px;
+            }
+
+            .final p {
+                margin: 0;
+                font-size: clamp(14px,4.8vw,18px)
+            }
+
+        /* küçük sallanma/komiklik */
+        .shake {
+            animation: shake .4s ease
+        }
+
+        @keyframes shake {
+            0%,100% {
+                transform: translateX(0)
+            }
+
+            25% {
+                transform: translateX(-6px)
+            }
+
+            50% {
+                transform: translateX(6px)
+            }
+
+            75% {
+                transform: translateX(-3px)
+            }
+        }
+
+        /* ekranı dolduran kalp parçacıkları */
+        .p {
+            position: fixed;
+            left: 0;
+            top: 0;
+            pointer-events: none;
+            z-index: 5;
+            font-size: 20px;
+            text-shadow: 0 2px 8px rgba(0,0,0,.25);
+            will-change: transform, opacity;
+        }
+    </style>
+</head>
+<body>
+    <!-- Nabız atan dev kalp (arkaplan) -->
+    <div class="big-heart" style="left:50%; top:50%; transform:translate(-50%,-50%) rotate(45deg)"></div>
+
+    <div class="wrap">
+        <main class="card" id="card" aria-live="polite">
+            <h1>Rabia, benimle çıkar mısın? 💖</h1>
+            <p class="lead">Cevabın kalbimi etkiler, dikkatli seç 🙈</p>
+
+            <div class="btns" id="btns">
+                <button class="btn yes" id="yesBtn">Evet</button>
+                <button class="btn no" id="noBtn">Hayır</button>
+            </div>
+
+            <div class="note" id="note"></div>
+
+            <!-- Final ekranı -->
+            <section class="final" id="final">
+                <h2>Beraber merdiven çıkabiliriz 😂</h2>
+                <p>Ben nefes, sen ritim; ikimiz de kalp atışı! 💞</p>
+            </section>
+        </main>
+    </div>
+
+    <script>
+  const yesBtn = document.getElementById('yesBtn');
+  const noBtn  = document.getElementById('noBtn');
+  const note   = document.getElementById('note');
+  const card   = document.getElementById('card');
+  const final  = document.getElementById('final');
+  const btns   = document.getElementById('btns');
+
+  // "Hayır" akışı: not yaz, Hayır'ı kaldır, kartı biraz salla
+  noBtn.addEventListener('click', () => {
+    note.textContent = 'Yanlış cevap 😜 Tekrar dene!';
+    noBtn.remove();                 // sadece EVET kalsın
+    card.classList.remove('shake'); // ardışık tıklamalar için reset
+    void card.offsetWidth;          // reflow trick
+    card.classList.add('shake');
+    if (navigator.vibrate) navigator.vibrate(60);
+  });
+
+  // "Evet" akışı: butonları kaldır, final mesajını göster, kalpler yağsın
+  yesBtn.addEventListener('click', () => {
+    btns.remove();
+    note.textContent = '';
+    final.style.display = 'block';
+    startHearts();
+    if (navigator.vibrate) navigator.vibrate([40, 40, 40]);
+  });
+
+  /* ---- Kalp yağmuru / konfeti ---- */
+  function heart(){
+    const el = document.createElement('div');
+    el.className = 'p';
+    // birkaç emoji karışık: kalp + parıltı
+    const pool = ['💖','💘','💝','💗','✨','💞'];
+    el.textContent = pool[Math.floor(Math.random()*pool.length)];
+
+    const vw = Math.max(document.documentElement.clientWidth, window.innerWidth || 0);
+    const vh = Math.max(document.documentElement.clientHeight, window.innerHeight || 0);
+    const x = Math.random() * vw;
+    const size = 18 + Math.random()*28;
+    const drift = (Math.random()*120)-60;
+    const duration = 2600 + Math.random()*2600;
+
+    el.style.left = x+'px';
+    el.style.top = (vh+24)+'px';
+    el.style.fontSize = size+'px';
+    el.style.opacity = '0';
+    document.body.appendChild(el);
+
+    const start = performance.now(), startY = vh+24, endY = vh*0.18 + Math.random()*vh*0.28;
+    (function anim(t){
+      const now = t || performance.now();
+      const p = Math.min(1, (now-start)/duration);
+      const ease = 1 - Math.pow(1-p, 3);
+      const y = startY - (startY - endY) * ease;
+      const xOff = Math.sin(ease*7 + (x%11)) * 16 + (drift * ease);
+      el.style.transform = `translate(${xOff}px, ${y - startY}px)`;
+      el.style.opacity = (p<.1 ? p*10 : (1-p)*1.3);
+      if(p<1) requestAnimationFrame(anim); else el.remove();
+    })();
+  }
+
+  function startHearts(){
+    for(let i=0;i<26;i++) setTimeout(heart, i*50);  // ilk patlama
+    const timer = setInterval(heart, 120);
+    setTimeout(()=> clearInterval(timer), 9000);
+  }
+    </script>
+</body>
+</html>
